@@ -14,12 +14,12 @@ class AuthController extends Controller
 
     public function checkLogin(Request $request) {
         $data = $request->all();
-        if (empty($data['username']) && empty($data['pwd'])) {
+        if (empty($data['username']) || empty($data['pwd'])) {
             return redirect()->route('admin.auth.login');
         }
         session(['usr' => $data['username'], 'pwd' => $data['pwd']]);
 
-        return redirect()->route('woodblocks.index');
+        return redirect()->route('admin.index');
     }
 
     public function username() {

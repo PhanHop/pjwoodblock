@@ -17,7 +17,7 @@ class CheckLoginAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (empty(session('usr')) && empty(session('pwd'))) {
+        if (empty(session('usr')) || empty(session('pwd'))) {
             return redirect()->route('admin.auth.login');
         }
         $data_array = DB::table('users')->where('username', '=', session('usr'))->get(['username', 'password'])->all();
